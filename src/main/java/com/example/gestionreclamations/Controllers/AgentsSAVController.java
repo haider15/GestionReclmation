@@ -54,6 +54,16 @@ public class AgentsSAVController {
         }
         return ResponseEntity.ok(updatedAgent); // Si l'agent a été mis à jour avec succès
     }
+    
+    @PostMapping("/login")
+    public ResponseEntity<AgentSAV> login(@RequestBody AgentSAV loginRequest) {
+        AgentSAV agent = service.login(loginRequest.getNom(), loginRequest.getMotDePasse());
+        if (agent == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+        return ResponseEntity.ok(agent);
+    }
+
 
 
 }

@@ -30,5 +30,9 @@ public class AgentSAVService {
         // Sauvegarde l'agent mis à jour dans la base de données
         return repository.save(existingAgent);
     }
+    
+    public AgentSAV login(String nom, String motDePasse) {
+        return repository.findByNomAndMotDePasse(nom, motDePasse).orElse(null);
+    }
 
 }

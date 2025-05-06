@@ -13,6 +13,7 @@ public class AgentSAV {
     private Long id;
     private String nom;
     private String competence;
+    private String motDePasse; 
 	public Long getId() {
 		return id;
 	}
@@ -21,6 +22,12 @@ public class AgentSAV {
 	}
 	public String getNom() {
 		return nom;
+	}
+	public String getMotDePasse() {
+		return motDePasse;
+	}
+	public void setMotDePasse(String motDePasse) {
+		this.motDePasse = motDePasse;
 	}
 	public void setNom(String nom) {
 		this.nom = nom;
@@ -31,4 +38,6 @@ public class AgentSAV {
 	public void setCompetence(String competence) {
 		this.competence = competence;
 	}
+	
+	
 }

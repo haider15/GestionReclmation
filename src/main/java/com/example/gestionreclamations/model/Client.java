@@ -14,6 +14,7 @@ public class Client {
     private String nom;
     private String email;
     private String telephone;
+    private String motDePasse;
 	public Long getId() {
 		return id;
 	}
@@ -37,5 +38,13 @@ public class Client {
 	}
 	public void setTelephone(String telephone) {
 		this.telephone = telephone;
+	}
+	
+	public String getMotDePasse() {
+	    return motDePasse;
+	}
+
+	public void setMotDePasse(String motDePasse) {
+	    this.motDePasse = motDePasse;
 	}
 }

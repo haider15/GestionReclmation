@@ -41,4 +41,9 @@ public class ClientService {
         // Sauvegarde du client mis à jour
         return repository.save(existingClient);
     }
+    
+    
+    public Client login(String nom, String motDePasse) {
+        return repository.findByNomAndMotDePasse(nom, motDePasse).orElse(null);
+    }
 }

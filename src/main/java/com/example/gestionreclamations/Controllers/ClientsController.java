@@ -54,4 +54,14 @@ public class ClientsController {
         }
         return ResponseEntity.ok(updatedClient); // 200 Si client mis à jour avec succès
     }
+    
+    @PostMapping("/login")
+    public ResponseEntity<Client> login(@RequestBody Client loginRequest) {
+        Client client = service.login(loginRequest.getNom(), loginRequest.getMotDePasse());
+        if (client == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+        return ResponseEntity.ok(client);
+    }
+
 }
