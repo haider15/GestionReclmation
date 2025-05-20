@@ -3,6 +3,9 @@ package com.example.gestionreclamations.model;
 import jakarta.persistence.*;
 import lombok.*;
 import java.time.LocalDate;
+
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 @Entity
 @Data
 @NoArgsConstructor
@@ -13,6 +16,8 @@ public class Reclamation {
     private Long id;
 
     @ManyToOne
+    @JoinColumn(name = "client_id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Client client; // Relation avec Client
 
     private String statut;
