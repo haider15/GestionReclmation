@@ -3,6 +3,8 @@ package com.example.gestionreclamations.model;
 import jakarta.persistence.*;
 import lombok.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -16,9 +18,14 @@ public class Reclamation {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "client_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
-    private Client client; // Relation avec Client
+    @JoinColumn(name = "client_id", nullable = true)
+    private Client client;
+
+    
+    @OneToMany(mappedBy = "reclamation", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<SuiviReclamation> suivis = new ArrayList<>();
+
 
     private String statut;
     public Long getId() {

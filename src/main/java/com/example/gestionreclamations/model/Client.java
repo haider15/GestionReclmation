@@ -1,5 +1,8 @@
 package com.example.gestionreclamations.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -47,4 +50,7 @@ public class Client {
 	public void setMotDePasse(String motDePasse) {
 	    this.motDePasse = motDePasse;
 	}
+	@OneToMany(mappedBy = "client",cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Reclamation> reclamations = new ArrayList<>();
+	
 }

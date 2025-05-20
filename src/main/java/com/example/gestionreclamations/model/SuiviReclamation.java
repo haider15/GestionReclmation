@@ -20,13 +20,14 @@ public class SuiviReclamation {
 
     @ManyToOne
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    @JoinColumn(name = "reclamation_id", nullable = true)
     private Reclamation reclamation;
 
     @ManyToOne
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    @JoinColumn(name = "employe_id", nullable = true)
     private AgentSAV employe;
+
 
     // Getters et Setters pour tous les champs
 
@@ -77,4 +78,6 @@ public class SuiviReclamation {
     public void setEmploye(AgentSAV employe) {
         this.employe = employe;
     }
+    
+    
 }

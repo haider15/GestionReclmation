@@ -1,5 +1,8 @@
 package com.example.gestionreclamations.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -39,5 +42,8 @@ public class AgentSAV {
 		this.competence = competence;
 	}
 	
+	@OneToMany(mappedBy = "employe", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<SuiviReclamation> suivis = new ArrayList<>();
+
 	
 }
