@@ -1,28 +1,19 @@
-# Étape 1 : Build de l'application avec Gradle
-FROM gradle:8.5-jdk21 AS builder
-
+# Étape 1 : Build avec Gradle + JDK 21
+FROM gradle:8.4-jdk21 AS build
 WORKDIR /app
 
-# Copier les fichiers nécessaires pour builder (optimisé pour le cache)
-COPY build.gradle settings.gradle gradlew ./
-COPY gradle ./gradle
+COPY build.gradle settings.gradle ./
+COPY src ./src
 
-# Télécharger les dépendances
-RUN ./gradlew dependencies
+# Utilisation de --no-daemon pour éviter de laisser le daemon Gradle tourner dans le conteneur
+RUN gradle build -x test --no-daemon
 
-# Copier le code source
-COPY . .
-
-# Build du projet (fichier .jar sera généré dans build/libs/)
-RUN ./gradlew bootJar
-
-# Étape 2 : Image finale légère avec OpenJDK 21
+# Étape 2 : Exécution avec JDK 21 JRE (version plus légère que JDK)
 FROM eclipse-temurin:21-jre
-
 WORKDIR /app
 
-# Copier le jar depuis l'image builder
-COPY --from=builder /app/build/libs/*.jar app.jar
+# Copier uniquement le jar produit
+COPY --from=build /app/build/libs/*.jar app.jar
 
 EXPOSE 8081
 
