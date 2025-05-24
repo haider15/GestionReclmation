@@ -81,7 +81,7 @@ public class ReclamationService {
     public ByteArrayInputStream generateSatisfactionReportPdf() {
         List<Reclamation> reclamations = repository.findAll();  // Récupère toutes les réclamations
         Document document = new Document();
-        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        ByteArrayOutputStream out = new ByteArrayOutputStream();  //flux en memoire
 
         try {
             PdfWriter.getInstance(document, out);
@@ -101,6 +101,7 @@ public class ReclamationService {
 
             // Ajouter la moyenne au rapport
             document.add(new Paragraph("Moyenne des notes : " + String.format("%.2f", moyenne), fontBody));
+          
             document.add(new Paragraph("Nombre total de réclamations : " + reclamations.size(), fontBody));
             document.add(new Paragraph("-------------------------------------------------------------"));
 
